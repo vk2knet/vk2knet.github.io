@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <script>
+	  /* 
+	     Author: VK
+		 Date: 2022-02-18
+		 Default page workaround for Firefox AutoDiscard extension not playing nice with TreeStyleTabs
+	  */
+	  
+	  	/* function redirect with title parameters */
+	  function pTitle(){
+	    //encodeURI friendly string
+	    const titleText = encodeURIComponent(document.getElementById("titleText").value);
+		//redirect with title parameters
+		window.location.href = window.location.protocol + window.location.pathname + "?name=" + titleText;
+	  }
+	  /* function set page title on load using parameters*/
+	  window.onload = function setTitle(){
+	    //extract parameters from url
+	    const urlParams = new URLSearchParams(window.location.search);
+		//Set title to blank if no parameters
+	    if (urlParams.has('name')) {
+	       document.title = urlParams.get('name');
+	    } else {
+	       document.title = "BLANK";
+	    }
+	  }
+    </script>
+	<style>
+	  .center {
+        padding: 300px 0;
+        border: 30px solid #202020;
+        text-align: center;
+      }
+	</style>
+  </head>
+  <body style="background-color:#28282B;">
+    <center>
+	<div class="center">
+	<p style="color:WhiteSmoke">Enter Title: <input type="text" id="titleText"/> <input type="button" value="Submit" onclick="pTitle()"/></p>
+	</div>
+  </center>
+  </body>
+</html>
